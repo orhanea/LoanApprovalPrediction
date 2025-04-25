@@ -65,7 +65,9 @@ if submitted:
     train_data['NEW_yıllık_ort_kredi_kullanım'] = train_data['loan_amnt'] / train_data['cb_person_cred_hist_length']
 
     # Model yükle
-    model = joblib.load("C:\\Users\\linae\\PycharmProjects\\miuul\\streamlit-app\\model_with_preprocessor.pkl")
+    current_dir = os.getcwd()
+    model_path = os.path.join(current_dir,"streamlit","model_with_preprocessor.pkl")
+    model = joblib.load(model_path)
 
     prediction = model.predict(train_data)
 
