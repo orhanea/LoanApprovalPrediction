@@ -121,7 +121,7 @@ if submitted:
 st.markdown("""
 <hr>
 <div style='text-align: center; color: gray; font-size: 14px;'>
-    Geliştirici: DatAkışı Ekibi | Gururla Sunar | 📅 2025
+    Geliştirici: Dattonlar Ekibi | Gururla Sunar | 📅 2025
 </div>
 """, unsafe_allow_html=True)
 
