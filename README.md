@@ -1,10 +1,22 @@
-# LoanApprovalPrediction
+<div align="center">
+  <h3>Loan Approval Prediction</h3>
+  <p><b>Made with ❤️ for Miuul Data Science Bootcamp by</b></p>
+    Melis Luzumlu<br>
+    Orhan Emre Anıl<br>
+    Emre Yıldırım<br>
+    Yüsra Yanardağ
+</div><br>
 
-The main purpose of the project is to predict whether users loans will be approved or not. The dataset of the Kaggle competition that we will use (both training and testing) was created from a deep learning model trained on the Loan Approval Prediction dataset. The target variable is present in the training set, but the target variable is not present in the test set. We will predict this missing variable with the model that we will create later using the original dataset that we found ourselves. You can find the datasets below. Later, we will share the necessary explanations of the variables with detailed graphics in this document.
+   
+The main purpose of the project is to predict whether users loans will be approved or not. The dataset of the Kaggle competition that we will use (both training and testing) was created from a deep learning model trained on the Loan Approval Prediction dataset. The target variable is present in the training set, but the target variable is not present in the test set. We will predict this missing variable with the model that we will create later using the original dataset that we found ourselves. You can find the datasets below. Later, we will share the necessary explanations of the variables with detailed graphics in this document. 
 
 Kaggle Playground Series : <https://www.kaggle.com/competitions/playground-series-s4e10/data>
 
-Orijinal veri seti : <https://www.kaggle.com/datasets/laotse/credit-risk-dataset>
+Original dataset : <https://www.kaggle.com/datasets/laotse/credit-risk-dataset>
+
+You can find our final presentation here : <https://www.canva.com/design/DAGktGhPNEk/MTa3aoD7HC_5D18EyQeygw/view?utm_content=DAGktGhPNEk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h697f9de5bb>
+
+Live Demo : https://predictloanapproval.streamlit.app/
 
 ## Columns
 
