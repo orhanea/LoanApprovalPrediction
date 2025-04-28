@@ -1,12 +1,12 @@
 # LoanApprovalPrediction
 
-Projenin asıl amacı kullanıcıların kredisinin onaylanıp onaylanmayacağını tahmin etmektir. Kullanacağımız kaggle yarışmasının veri seti (hem eğitim hem de test), Kredi Onayı Tahmini veri seti üzerinde eğitilen derin öğrenme modelinden oluşturuldu. Eğitim setinde hedef değişken mevcut ama test setinde hedef değişken mevcut değildir. Bu mevcut olmayan değişkeni biz daha sonradan kendimiz bulduğumuz orijinal veri setini de kullanarak oluşturacağımız model ile tahminleme yapacağız. Veri setlerini aşağıda bulabilirsiniz. Daha sonrasında değişkenlerin gerekli açıklamalarını ayrıntılı grafikler ile bu dokümanda paylaşacağız.
+The main purpose of the project is to predict whether users loans will be approved or not. The dataset of the Kaggle competition that we will use (both training and testing) was created from a deep learning model trained on the Loan Approval Prediction dataset. The target variable is present in the training set, but the target variable is not present in the test set. We will predict this missing variable with the model that we will create later using the original dataset that we found ourselves. You can find the datasets below. Later, we will share the necessary explanations of the variables with detailed graphics in this document.
 
 Kaggle Playground Series : <https://www.kaggle.com/competitions/playground-series-s4e10/data>
 
 Orijinal veri seti : <https://www.kaggle.com/datasets/laotse/credit-risk-dataset>
 
-## 🚩 Değişkenlerimiz
+## Columns
 
 1. [person_age](#person_age)
 2. [person_income](#person_income)
@@ -23,31 +23,34 @@ Orijinal veri seti : <https://www.kaggle.com/datasets/laotse/credit-risk-dataset
 
 ## person_age
 
-- Değişken türü hem train hem test için int64 .
-- 40 yaş altı yoğunluklu bir müşteri portfolyomuz var. 
-- 40 yaş sonrası müşterilerimiz çok seyrek.
-- Train ve Test verilerimiz birbirine benzer dağılım göstermektedir.
+- Shows person age.
+- Variable type is int64 for both train and test.
+- We have a customer portfolio that is densely populated with people under the age of 40.
+- Our customers over the age of 40 are very rare.
+- Our Train and Test data show similar distributions.
 
   ![Alt text](images/person_age.png)
 
-## person_income: Kişinin yıllık geliri (USD cinsinden).
+## person_income
 
-- Değişken türü hem train hem test için int64
-- 205.000 USD altında yıllık geliri olan müşterilerimiz verimizin çoğunluğu oluşturuyor fakat daha üst yıllık gelir elde eden müşterilerimizde var ama çok az bir azınlık
-- Train ve test veri setlerimiz aynı dağılıma sahip
+- The person's annual income (in USD).
+- Variable type is int64 for both train and test
+- Our data is comprised of clients with annual incomes under $205,000, but we also have clients with higher annual incomes, but they are a very small minority.
+- Our Train and Test data show similar distributions.
 
   ![Alt text](images/person_income.png)
 
-## person_home_ownership: Kişinin ev sahipliği durumu
+## person_home_ownership
 
-- Değişken türü hem train hem test için object
+- Shows person home status.
+- Variable type is object for both train and test
 
-   -  RENT: Kirada
-   - OWN: Ev sahibi
-   - MORTGAGE: Kredili ev sahibi
-   - OTHER: Diğer
+   - RENT
+   - OWN
+   - MORTGAGE
+   - OTHER
 
-- Train ve test veri setlerimiz aynı dağılıma sahip
+- Our Train and Test data show similar distributions.
 
   ![Alt text](images/person_home_ownership.png)
 
@@ -55,69 +58,78 @@ Orijinal veri seti : <https://www.kaggle.com/datasets/laotse/credit-risk-dataset
   
   ![Alt text](images/person_home_ownership_original.png)
 
-## person_emp_length: Başvuranın kaç yıldır çalıştığı
+## person_emp_length
 
-- Değişken türü hem train hem test için float64
-
+- Shows how many years for the applicant has been working
+- Variable type is float64 for both train and test
+  
   ![Alt text](images/person_emp_length.png)
 
-## loan_intent: Başvuranın krediye ihtiyaç duymasının nedeni.
+## loan_intent
 
-- Değişken türü hem train hem test için object
+- The reason why the applicant needs the loan.
+- Variable type is object for both train and test
 
   - **EDUCATION** – **Eğitim**  
-    Eğitimle ilgili harcamaları finanse etmek için kullanılan kredileri ifade eder (örneğin, okul ücreti, kitap, kurs).
+    Refers to loans used to finance education-related expenses (e.g., tuition, books, courses).
   - **MEDICAL** – **Tıbbi / Sağlık**  
-    Sağlıkla ilgili giderleri karşılamak için alınan kredileri ya da sağlık hizmetlerini ifade eder (örneğin, ameliyat, tedavi, ilaç).
+    Refers to loans taken to cover health-related expenses or health services (e.g., surgery, treatment, medicine).
   - **PERSONAL** – **Kişisel**  
-    Genel bireysel ihtiyaçlar için alınan kredilerdir. Özel bir amaca bağlı değildir; tatil, alışveriş veya borç kapatma gibi çok çeşitli kullanımları olabilir.
+    These are loans taken for general individual needs. They are not tied to a specific purpose; they can have a wide variety of uses such as vacation, shopping or debt settlement.
   - **VENTURE** – **Girişim / Yatırım**  
-    Genellikle yeni iş kurma ya da mevcut işini büyütme amacıyla yapılan yatırımları veya girişimleri ifade eder.
+    It generally refers to investments or initiatives made for the purpose of establishing a new business or expanding an existing business.
   - **DEBT CONSOLIDATION** – **Borç Birleştirme**  
-    Birden fazla borcun tek bir kredi altında toplanarak daha kolay ödenmesini sağlayan finansal yöntemdir. Faiz oranı düşürülebilir ve ödeme takvimi sadeleştirilebilir.
+    It is a financial method that allows multiple debts to be paid more easily by combining them into a single loan. The interest rate can be reduced and the payment schedule can be simplified.
   - **HOME IMPROVEMENT** – **Ev Yenileme / İyileştirme**  
-    Ev tadilatı, onarımı ya da geliştirmesi için kullanılan kredilerdir (örneğin, mutfak yenileme, çatı tamiri, enerji verimliliği artırma).
+    Loans for home renovations, repairs, or improvements (e.g., kitchen renovations, roof repairs, energy efficiency improvements).
         
     ![Alt text](images/loan_intent.png)
         
-## loan_grade: Başvuranın kredileri geri ödemede ne kadar güvenilir olduğunu gösteren bir puan.
+## loan_grade
 
-- Değişken türü hem train hem test için object
-
-- A,B,C,D,E,F,G( A en güvenilir olan segment diğerleri gittikçe azalıyor)
+- A score that indicates how reliable the applicant is at repaying loans.
+- Variable type is object for both train and test
+- A,B,C,D,E,F,G(A is the most reliable segment, others are decreasing)
 
   ![Alt text](images/loan_grade.png)
   
-## loan_amnt: Başvuranın borç almak istediği para miktarı.
+## loan_amnt
 
-- Değişken türü hem train hem test için int64
+- Shows that the amount of money the applicant wishes to borrow.
+- Variable type is int64 for both train and test
 
 ![Alt text](images/loan_amount.png)
 
-## loan_int_rate: Krediye uygulanan faiz oranı.
+## loan_int_rate
 
-- Değişken türü hem train hem test için float64
-
-- (kredi faiz oranı) ifadesi, genellikle bir kredinin yıllık faiz oranını yüzde (%) cinsinden gösterir. 11.49 değeri, bu kredi için yıllık %11.49 faiz uygulandığını gösteriyor.
+- Shows that the interest rate applied to the loan.
+- Variable type is float64 for both train and test
+- The expression (loan interest rate) usually indicates the annual interest rate of a loan in percentage (%). The value 11.49 indicates that 11.49% interest is charged annually for this loan.
 
 ![Alt text](images/loan_int_grade.png)
 
-## loan_percent_income: Başvuranın gelirinin ne kadarlık kısmının kredi ödemelerine gideceği.
+## loan_percent_income
 
-- Hem train hem test için türü float64
+- Shows that what portion of the applicant's income will go to loan payments.
+- Variable type is float64 for both train and test
 
 ![Alt text](images/loan_percent_income.png)
 
-## cb_person_default_on_file: Başvuranın daha önce bir krediyi geri ödemede başarısız olup olmadığını gösterir.
+## cb_person_default_on_file
 
-- Hem train hem test için türü object
+- Indicates whether the applicant has previously failed to repay a loan.
+- Variable type is object for both train and test
 
 ![Alt text](images/cb_person_default_on_file.png)
 
-## cb_person_cred_hist_length: Başvuranın kredi geçmişinin ne kadar uzun olduğu
+## cb_person_cred_hist_length
 
-- Hem train hem test için türü int64
+- How long the applicant's credit history is.
+- Variable type is int64 for both train and test
 
 ![Alt text](images/cb_person_cred_hist_length.png)
 
-## loan_status: Kredinin onaylandığını veya reddedildiğini gösterir.
+## loan_status
+
+- Indicates whether the loan has been approved or rejected.
+- Showns whether the credit is approved or not.
