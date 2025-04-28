@@ -21,7 +21,7 @@ Orijinal veri seti : <https://www.kaggle.com/datasets/laotse/credit-risk-dataset
 11. [cb_person_cred_hist_length](#cb_person_cred_hist_length)
 12. [loan_status](#loan_status)
 
-## person_age: Kişinin yaşı
+## person_age
 
 - Değişken türü hem train hem test için int64 .
 - 40 yaş altı yoğunluklu bir müşteri portfolyomuz var. 
